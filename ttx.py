@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 import sys
 
@@ -50,7 +50,7 @@ for bp in project.valid_specifications:
 for bp in blueprints:
     issues = ""
     # No assignee
-    if bp.milestone: 
+    if bp.milestone:
         if not bp.assignee:
             issues += "* Targeted to a milestone but has no assignee\n"
         if bp.implementation_status == "Unknown":
