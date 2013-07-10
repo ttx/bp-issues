@@ -83,17 +83,10 @@ for bp in series.valid_specifications:
                 else:
                     in_progress += 1
 
-        # No assignee
-        if not bp.assignee:
-            needs_assignee.append(bp)
-
         # No priority
         if prio.index(bp.priority) < 2:
             needs_triage.append(bp)
-
-        # Unknown status
-        if bp.implementation_status == "Unknown":
-            unknown_status.append(bp)
+            continue
 
         # Dependencies
         for dep in bp.dependencies:
@@ -101,6 +94,15 @@ for bp in series.valid_specifications:
                 if (prio.index(bp.priority) > prio.index(dep.priority) or not
                     dep.milestone):
                     depends_issues.append((bp, dep))
+
+        # No assignee
+        if not bp.assignee:
+            needs_assignee.append(bp)
+            continue
+
+        # Unknown status
+        if bp.implementation_status == "Unknown":
+            unknown_status.append(bp)
 
         continue
 
